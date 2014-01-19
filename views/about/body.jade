@@ -1,0 +1,16 @@
+.container
+    .row
+        .col-md-12
+            div(id="hostDetailsDiv")
+
+    footer
+        p.pull-right
+            a(href='#') Back to top
+        p
+
+script
+    :coffee
+        window.controller.getHostDetails (data)->
+            $("#hostDetailsDiv").append(data.html)
+
+

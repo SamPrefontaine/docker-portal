@@ -1,0 +1,105 @@
+table.table.table-hover
+    thead
+        tr
+            th
+                b Name
+
+            th
+                b Image
+
+            th
+                b Cmd
+
+            th
+                b Status
+
+    tbody
+        for container in containers
+            if container.Status.indexOf("Up") >= 0
+                tr
+                    td
+                        h4
+                            span.label.label-success
+                                a(style="color:white !important;", href="#/containers/inspect/#{container.Id}", data-component="containers", data-method="getContainerDetails", data-id="#{container.Id}", id="#container_{container.Id}") #{container.Names[0]}
+
+                    td
+                        h4
+                            span.label.label-default #{container.Image}
+
+                    td
+                        h4 #{container.Command}
+
+                    td
+                        h4
+                            span.label.label-success #{container.Status}
+
+            else if container.Status == "Exit 0"
+                tr
+                    td
+                        h4
+                            span.label.label-default
+                                a(style="color:white !important;", href="#/containers/inspect/#{container.Id}", data-component="containers", data-method="getContainerDetails", data-id="#{container.Id}", id="#container_{container.Id}") #{container.Names[0]}
+
+                    td
+                        h4
+                            span.label.label-default #{container.Image}
+
+                    td
+                        h4 #{container.Command}
+
+                    td
+                        h4
+                            span.label.label-default #{container.Status}
+
+            else if container.Status == "Exit 127"
+                tr
+                    td
+                        h4
+                            span.label.label-warning
+                                a(style="color:white !important;", href="#/containers/inspect/#{container.Id}", data-component="containers", data-method="getContainerDetails", data-id="#{container.Id}", id="#container_{container.Id}") #{container.Names[0]}
+
+                    td
+                        h4
+                            span.label.label-default #{container.Image}
+
+                    td
+                        h4 #{container.Command}
+
+                    td
+                        h4
+                            span.label.label-warning #{container.Status}
+
+            else if container.Status == "Exit 1"
+                tr
+                    td
+                        h4
+                            span.label.label-danger
+                                a(style="color:white !important;", href="#/containers/inspect/#{container.Id}", data-component="containers", data-method="getContainerDetails", data-id="#{container.Id}", id="#container_{container.Id}") #{container.Names[0]}
+
+                    td
+                        h4
+                            span.label.label-default #{container.Image}
+
+                    td
+                        h4 #{container.Command}
+
+                    td
+                        h4
+                            span.label.label-danger #{container.Status}
+
+            else
+                tr
+                    td
+                        h4
+                            span.label.label-default
+                                a(style="color:white !important;", href="#/containers/inspect/#{container.Id}", data-component="containers", data-method="getContainerDetails", data-id="#{container.Id}", id="#container_{container.Id}") #{container.Names[0]}
+                    td
+                        h4
+                            span.label.label-default #{container.Image}
+
+                    td
+                        h4 #{container.Command}
+
+                    td
+                        h4
+                            span.label.label-default #{container.Status}

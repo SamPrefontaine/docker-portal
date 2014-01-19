@@ -1,0 +1,33 @@
+ul.nav.nav-pills
+    li(data-group="containerNav")
+        a(data-id="#{details.ID}", data-component="containers", data-method="getContainerDetails", href="#/containers/inspect/#{details.ID}") Details
+    li(data-group="containerNav")
+        a(data-id="#{details.ID}", data-component="containers", data-method="getContainerLogs", href="#/containers/logs/#{details.ID}") Logs
+    li(data-group="containerNav").active
+        if !details.State.Running
+            a(data-id="#{details.ID}", data-component="containers", data-method="doStart", href="#/containers/start/#{details.ID}") Start
+        else
+            a(data-id="#{details.ID}", data-component="containers", data-method="doRestart", href="#/containers/restart/#{details.ID}") Restart
+    if details.State.Running
+        li(data-group="containerNav")
+            a(href="#/containers/stop/#{details.ID}") Stop
+    else
+        li(data-group="containerNav")
+            a(data-id="#{details.ID}", data-component="containers", data-method="doDelete", href="#/containers/delete/#{details.ID}") Delete
+
+
+div(class="well", id="dockerContainerDetailsDiv")
+    .alert.alert-success
+        p Are you sure you want to start
+            b &nbsp;#{details.Name.substr(1)}?
+
+        hr
+        label(style="width:95%",for="runContainerBinds") FS Binds
+            input.form-control(type="text", id="runContainerBinds", placeholder="[\"/vagrant:/opt/src\"]")
+
+        label(style="width:95%",for="runContainerPortBindings") Port Bindings
+            input.form-control(type="text", id="runContainerPortBindings", placeholder="{\"3001/tcp\": [{ \"HostPort\": \"3001\", \"HostIp\": \"0.0.0.0\" }]}")
+
+    button.btn.btn-success(data-id="#{details.ID}", data-component="containers", data-method="startContainer", type="button") Start
+    span(style="padding:5px")
+    button.btn.btn-default(data-id="#{details.ID}", data-component="containers", data-method="getContainerDetails", type="button") Cancel

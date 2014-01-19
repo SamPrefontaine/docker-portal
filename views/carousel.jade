@@ -1,0 +1,31 @@
+.carousel.slide(id="myCarousel")
+    ol.carousel-indicators
+        li.active(data-target='#myCarousel', data-slide-to='0')
+        li(data-target='#myCarousel', data-slide-to='1')
+        li(data-target='#myCarousel', data-slide-to='2')
+    .carousel-inner
+        .item.active
+            .container
+                .carousel-caption
+                    h1 docker-portal
+                    p Welcome to docker-portal
+
+
+        .item
+            .container
+                .carousel-caption
+                    h1 GitHub Project
+                    p
+                        | Help yourself to the base code.
+                    p
+                        a.btn.btn-large.btn-primary(href='https://github.com/PortalGNU/docker-portal') Github Project
+
+    a.left.carousel-control(href='#myCarousel', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left
+    a.right.carousel-control(href='#myCarousel', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right
+
+script
+    :coffee
+        $("#myCarousel").carousel
+            interval: 8500

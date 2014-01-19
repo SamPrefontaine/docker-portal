@@ -1,0 +1,18 @@
+.container
+
+    .row
+        .col-md-2
+            .list-group
+                a.list-group-item.active(href="#/images/all", data-name="images", data-component="view", data-method="getViewByName") All Images
+                a.list-group-item(data-name="buildimage", data-component="view", data-method="getViewByName", href="#/images/build") Build Image
+
+        .col-md-10
+            div(id="dockerImagesDiv")
+
+script
+    :coffee
+        window.controller.getAllImages (data)->
+            $("#dockerImagesDiv").append(data.html)
+
+
+

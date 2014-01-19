@@ -1,0 +1,5 @@
+FROM nodebuntu
+
+WORKDIR /opt/src
+
+CMD node app.js

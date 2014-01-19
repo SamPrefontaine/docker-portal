@@ -1,0 +1,87 @@
+.container(style="padding:0px")
+    .row
+        .col-md-12
+            h2 Docker Server Information
+
+    .row
+        .col-md-12
+            .well
+                .container(style="padding:0px")
+                    .row
+
+                        .col-md-6
+                            h4 Cpu info:
+                            for cpu, key in os.cpus()
+                                p CPU #{key} @ #{cpu.speed}MHz
+                                p #{cpu.model}
+
+                        .col-md-6
+
+                            h4 Load Average
+                            h5 full load is #{os.cpus().length} (# of cpus)
+                            p 1 min: #{(os.loadavg()[0]).toFixed(3)}&nbsp;
+                                span
+                                    label.label.label-default #{((os.loadavg()[0] * 100) / os.cpus().length).toFixed(2)}%
+                            p 5 min: #{(os.loadavg()[1]).toFixed(3)}&nbsp;
+                                span
+                                    label.label.label-default #{((os.loadavg()[1] * 100) / os.cpus().length).toFixed(2)}%
+                            p 15 min: #{(os.loadavg()[2]).toFixed(3)}&nbsp;
+                                span
+                                    label.label.label-default #{((os.loadavg()[2] * 100) / os.cpus().length).toFixed(2)}%
+
+    .row
+        .col-md-12
+            .well
+                .container(style="padding:0px")
+                    .row
+                        .col-md-6
+                            h4 Memory
+                            p Mem (mB): #{(os.totalmem() /1024/1024).toFixed(2)}mB
+
+                        .col-md-6
+
+
+    .row
+        .col-md-12
+            .well
+                .container(style="padding:0px")
+                    .row
+                        .col-md-6
+                            h4 Network Interfaces
+                            for interface, key in os.networkInterfaces()
+                                h5
+                                    label.label.label-default #{key}
+                                ul
+                                    for eth in interface
+                                        li (#{interface[0].family}) [#{interface[0].address}]
+
+    .row
+        .col-md-12
+            h2 docker-portal instance
+
+
+    .row
+        .col-md-12
+            .well
+                .container(style="padding:0px")
+                    .row
+                        .col-md-6
+                            h4 Process Information
+
+                            h5
+                                label.label.label-default Node Runtime
+                                span &nbsp; #{process.version}
+
+                            h5
+                                label.label.label-default Working Directory
+                                span &nbsp; #{process.cwd()}
+
+                            h5
+                                label.label.label-default Node Domain
+                                span &nbsp; #{process.domain}
+
+                            h5
+                                label.label.label-default Master Process ID
+                                span &nbsp; #{process.pid}
+
+

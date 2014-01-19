@@ -1,0 +1,36 @@
+table.table.table-hover
+    thead
+        tr
+            th
+                b Name
+
+            th
+                b Image
+
+            th
+                b Ports
+
+            th
+                b Status
+
+    tbody
+        for container in containers
+            tr
+                td
+                    h4
+                        span.label.label-success
+                            a(style="color:white !important;", href="#/containers/inspect/#{container.Id}", data-component="containers", data-method="getContainerDetails", data-id="#{container.Id}", id="#container_{container.Id}") #{container.Names[0]}
+                td
+                    h4
+                        span.label.label-default #{container.Image}
+
+                td
+                    h5
+                        if container.Ports
+                            for port in container.Ports
+                                | #{port.Type}://#{port.IP}:#{port.PublicPort}:#{port.PrivatePort}
+                                br
+
+                td
+                    h4
+                        span.label.label-success #{container.Status}

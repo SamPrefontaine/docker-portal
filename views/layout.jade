@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/components/bootstrap/dist/css/bootstrap.css')
+        link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.css')
+        link(rel='stylesheet', href='/css/carousel.css')
+
+        script(src="/components/jquery/jquery.min.js")
+        script(src="/components/bootstrap/dist/js/bootstrap.js")
+
+        !{assets.tag("/js/lib/Controller.js")}
+
+    body
+        block content
+
+    script
+        :coffee
+            $(document).ready ()->
+                window.controller = new window.Controller()

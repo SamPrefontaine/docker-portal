@@ -1,0 +1,26 @@
+ul.nav.nav-pills
+    li(data-group="containerNav")
+        a(data-id="#{details.ID}", data-component="containers", data-method="getContainerDetails", href="#/containers/inspect/#{details.ID}") Details
+    li(data-group="containerNav")
+        a(data-id="#{details.ID}", data-component="containers", data-method="getContainerLogs", href="#/containers/logs/#{details.ID}") Logs
+    li(data-group="containerNav")
+        if !details.State.Running
+            a(data-id="#{details.ID}", data-component="containers", data-method="doStart", href="#/containers/start/#{details.ID}") Start
+        else
+            a(data-id="#{details.ID}", data-component="containers", data-method="doRestart", href="#/containers/restart/#{details.ID}") Restart
+    if details.State.Running
+        li(data-group="containerNav").active
+            a(href="#/containers/stop/#{details.ID}") Stop
+    else
+        li(data-group="containerNav")
+            a(data-id="#{details.ID}", data-component="containers", data-method="doDelete", href="#/containers/delete/#{details.ID}") Delete
+
+
+div(class="well", id="dockerContainerDetailsDiv")
+    .alert.alert-warning
+        p Are you sure you want to stop
+            b &nbsp;#{details.Name.substr(1)}?
+
+    button.btn.btn-warning(data-id="#{details.ID}", data-component="containers", data-method="stopContainer", type="button") Stop
+    span(style="padding:5px")
+    button.btn.btn-default(data-id="#{details.ID}", data-component="containers", data-method="getContainerDetails", type="button") Cancel

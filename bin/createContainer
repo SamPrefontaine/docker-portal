@@ -1,0 +1,34 @@
+#!/usr/bin/env coffee
+
+request = require 'request'
+
+req =
+  Cmd: ["/usr/sbin/sshd","-D"]
+  Image: "ubuntu"
+  Hostname: ""
+  AttachStderr: true
+  AttachStdin: false
+  AttachStdout: true
+  Memory: 0
+  MemorySwap: 0
+  PortSpec: null
+  Volumes:
+    "/tmp": {}
+  Privileged: false
+  StdinOnce: false
+  Tty: false
+  User: ""
+  WorkingDir: ""
+
+
+processRequest = (err, res, body)->
+  console.log err || body
+  console.log res.statusCode
+
+config =
+  headers :
+    "Content-Type" : "application/json"
+  url : "http://192.168.3.18:4243/containers/create?name=test123"
+  body: JSON.stringify(req)
+
+request.post(config, processRequest)

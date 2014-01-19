@@ -1,0 +1,7 @@
+FROM nodebuntu
+
+WORKDIR /opt/src
+
+ENV PORT 3009
+
+CMD npm test

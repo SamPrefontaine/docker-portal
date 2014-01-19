@@ -1,0 +1,35 @@
+table.table.table-hover
+    thead
+        tr
+            th
+                b Tag
+
+            th
+                b Size mB
+
+            th
+                b Virtual mB
+
+            th
+                b Created
+
+    tbody
+        for image in images
+
+            tr
+                td
+                    h4
+                        span.label.label-success #{image.RepoTags}
+
+                td
+                    h4
+                        span.label.label-primary #{(image.Size /1000 /1000).toFixed(2)}
+
+                td
+                    h4
+                        span.label.label-default #{(image.VirtualSize /1000 /1000).toFixed(2)}
+
+
+                td
+
+                    h4 #{image.CreatedString}

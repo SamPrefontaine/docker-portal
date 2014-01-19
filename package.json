@@ -1,0 +1,36 @@
+{
+  "name": "docker-portal",
+  "version": "0.1.2",
+  "description": "docker dynamic webApps",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "test": "vows test/* --spec"
+  },
+  "licenses": [
+    { 
+      "type": "MIT", 
+      "url": "https://github.com/PortalGNU/docker-portal/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PortalGNU/docker-portal.git"
+  },
+  "keywords": [
+    "lxc-docker",
+    "docker",
+    "portal"
+  ],
+  "dependencies": {
+    "express": "*",
+    "jade": "*",
+    "ansi_up": "*",
+    "coffee-script": "*",
+    "async": "*",
+    "asset-rack": "*",
+    "connect-redis": "*",
+    "vows": "*",
+    "request": "*"
+  }
+}

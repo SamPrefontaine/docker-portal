@@ -1,0 +1,16 @@
+{
+  "name": "docker-portal",
+  "version": "0.0.1",
+  "authors": [
+    "Mike Kunze <mike.kunze@portalgnu.com>"
+  ],
+  "description": "Basic Express + Redis + MVC skel",
+  "license": "MIT",
+  "homepage": "http://portalgnu.com/projects/docker-portal",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "*",
+    "jquery": "*",
+    "font-awesome": "*"
+  }
+}

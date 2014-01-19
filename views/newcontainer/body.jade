@@ -1,0 +1,58 @@
+.container
+
+    .row
+        .col-md-2
+            .list-group
+                a.list-group-item(data-name="containers", data-component="view", data-method="getViewByName", href="#/containers") Active Containers
+                a.list-group-item(data-name="allcontainers", data-component="view", data-method="getViewByName", href="#/containers/all") All Containers
+                a.list-group-item.active(data-name="newcontainer", data-component="view", data-method="getViewByName", href="#/containers/new") New Container
+
+        .col-md-10
+            div(id="dockerContainersDiv")
+                h4 &nbsp;
+
+                    .form-group
+                        label(style="width:95%", for="image") Image
+                            select.form-control(multiple, id="startContainerImage")
+                                option(data-id="ubuntu") ubuntu:latest
+                                option(data-id="nodebuntu") Nodebuntu
+                                option(data-id="docker-portal") Docker Portal
+                                option(data-id="docker-portal-test") Docker Portal Test
+
+                        hr
+
+                        label(style="width:95%",for="startContainerHostname") Command
+                            input.form-control(type="text", id="startContainerCommand", placeholder="node --version")
+
+                        hr
+
+                        label(style="width:95%",for="startContainerHostname") Working Directory
+                            input.form-control(type="text", id="startContainerWorkDir", placeholder="/opt/src")
+
+                        hr
+
+                        label(style="width:95%",for="startContainerName") Name
+                            input.form-control(type="text", id="startContainerName", placeholder="Enter reference name")
+
+                        hr
+
+                        label(style="width:95%",for="startContainerEnv") Environment Variables
+                            input.form-control(type="text", id="startContainerEnv", placeholder="PORT=3000,DB_HOST=192.168.200.5")
+
+                        hr
+
+                        label(style="width:95%",for="startContainerPorts") TCP Ports
+                            input.form-control(type="text", id="startContainerPorts", placeholder="{'3001/tcp': {}}")
+
+                        hr
+
+                        label(style="width:95%",for="startContainerVolumes") Volumes
+                            input.form-control(type="text", id="startContainerVolumes", placeholder="{'/opt/src': {}}")
+
+                        hr
+
+                        center
+                            button.btn.btn-primary.btn-lg(data-component="containers", data-method="createContainer", style="width:600px") Start
+
+script
+    $("li [data-name='containers']").parent().addClass('active');

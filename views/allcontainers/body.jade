@@ -1,0 +1,21 @@
+.container
+
+    .row
+        .col-md-2
+            .list-group
+                a.list-group-item(data-name="containers", data-component="view", data-method="getViewByName", href="#/containers") Active Containers
+                a.list-group-item.active(data-name="allcontainers", data-component="view", data-method="getViewByName", href="#/containers/all") All Containers
+                a.list-group-item(data-name="newcontainer", data-component="view", data-method="getViewByName", href="#/containers/start") New Container
+
+        .col-md-10
+            div(id="dockerContainersDiv")
+
+            div(id="dockerContainerInfoDiv")
+
+
+script
+    :coffee
+        window.controller.getAllContainers (data)->
+            $("#dockerContainersDiv").append(data.html)
+
+            $("li [data-name='containers']").parent().addClass('active')

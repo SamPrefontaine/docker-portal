@@ -1,0 +1,178 @@
+ul.nav.nav-pills
+    li(data-group="containerNav").active
+        a(data-id="#{details.ID}", data-component="containers", data-method="getContainerDetails", href="#/containers/inspect/#{details.ID}") Details
+
+    li(data-group="containerNav")
+        a(data-id="#{details.ID}", data-component="containers", data-method="getContainerLogs", href="#/containers/logs/#{details.ID}") Logs
+
+    li(data-group="containerNav")
+        if !details.State.Running
+            a(data-id="#{details.ID}", data-component="containers", data-method="doStart", href="#/containers/start/#{details.ID}") Start
+        else
+            a(data-id="#{details.ID}", data-component="containers", data-method="doRestart", href="#/containers/restart/#{details.ID}") Restart
+
+    if details.State.Running
+        li(data-group="containerNav")
+            a(data-id="#{details.ID}", data-component="containers", data-method="doStop", href="#/containers/stop/#{details.ID}") Stop
+
+    else
+        li(data-group="containerNav")
+            a(data-id="#{details.ID}", data-component="containers", data-method="doDelete", href="#/containers/delete/#{details.ID}") Delete
+
+div(class="well", id="dockerContainerDetailsDiv")
+
+    .container
+        .row
+            .col-md-12
+                h3
+                    span.label.label-default Command
+
+        .row
+            .col-md-2
+                h5
+                    span.label.label-info Path
+            .col-md-10
+                h4 #{details.Path}
+        .row
+            .col-md-2
+                h5
+                    span.label.label-info Args
+            .col-md-10
+                h4 #{details.Args}
+
+        if details.State.Running
+            .row
+                .col-md-12
+                    h3
+                        span.label.label-default Networking
+
+            .row
+                .col-md-2
+                    h5
+                        span.label.label-info IP:
+                .col-md-10
+                    h4 #{details.NetworkSettings.IPAddress}
+
+            .row
+                .col-md-2
+                    h5
+                        span.label.label-info Gateway:
+                .col-md-10
+                    h4 #{details.NetworkSettings.Gateway}
+
+            .row
+                .col-md-2
+                    h5
+                        span.label.label-info Bridge:
+                .col-md-10
+                    h4 #{details.NetworkSettings.Bridge}
+
+            if details.NetworkSettings.Ports
+                .row
+                    .col-md-2
+                        h5
+                            span.label.label-info Ports:
+                    .col-md-10
+                        .container(style="padding:0px")
+                            for portDetails, port in details.NetworkSettings.Ports
+                                .row
+                                    .col-md-12
+                                        for detail in portDetails
+                                            h4 #{detail.HostIp}:#{detail.HostPort}:#{port}
+
+        h3
+            span.label.label-default Volumes
+        if details.Volumes
+            for volGuest, volHost in details.Volumes
+                .row
+                    .col-md-2
+                        h5
+                            span.label.label-info #{volHost}:
+
+                    .col-md-10
+                        h4 #{volGuest}
+                            if details.VolumesRW[volHost] == true
+                                | &nbsp {r/w}
+                            else
+                                | span {r}
+
+
+        .row
+            .col-md-12
+                h3
+                    span.label.label-default Basic Details for #{details.Name.substr(1)}
+        .row
+            .col-md-2
+                h5
+                    span.label.label-info Id:
+            .col-md-10
+                h5 #{details.ID}
+        .row
+            .col-md-2
+                h5
+                    span.label.label-info Created:
+            .col-md-10
+                h5 #{details.Created}
+
+        if details.State.Running
+            .row
+                .col-md-2
+                    h5
+                        span.label.label-info Started At
+                .col-md-10
+                    h5 #{details.State.StartedAt}
+
+            .row
+                .col-md-2
+                    h5
+                        span.label.label-info Process ID
+                .col-md-10
+                    h5 #{details.State.Pid}
+
+        if details.State.Running == false
+            .row
+                .col-md-2
+                    h5
+                        span.label.label-info Started At
+                .col-md-10
+                    h5 #{details.State.StartedAt}
+            .row
+                .col-md-2
+                    h5
+                        span.label.label-info Finished At
+                .col-md-10
+                    h5 #{details.State.FinishedAt}
+        .row
+            .col-md-2
+                h5
+                    span.label.label-info Hostname:
+            .col-md-10
+                h5 #{details.Config.Hostname}
+        .row
+            .col-md-2
+                h5
+                    span.label.label-info Env:
+            .col-md-10
+                if details.Config.Env != null
+
+                    h5 !{details.Config.Env.join('<br>')}
+
+        .row
+            .col-md-2
+                h5
+                    span.label.label-info Exposed Ports:
+            .col-md-10
+                if details.Config.ExposedPorts != null
+
+                    for port, key in details.Config.ExposedPorts
+                        h5 #{key}
+
+        .row
+            .col-md-2
+                h5
+                    span.label.label-info Working Directory:
+            .col-md-10
+                h5 !{details.Config.WorkingDir} <br>
+
+
+

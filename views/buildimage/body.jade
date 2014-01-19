@@ -1,0 +1,11 @@
+.container
+
+    .row
+        .col-md-2
+            .list-group
+                a.list-group-item(data-name="images", data-component="view", data-method="getViewByName", href="#/images/all") All Images
+                a.list-group-item.active(data-name="buildimage", data-component="view", data-method="getViewByName", href="#/images/build") Build Image
+
+        .col-md-10
+            h4 Build an Image
+            div(id="dockerImagesDiv")
